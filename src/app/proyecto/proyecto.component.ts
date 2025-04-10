@@ -38,11 +38,13 @@ export class ProyectoComponent implements OnInit {
 
   cargarProyectos(): void {
     this.http
-      .get<any>('http://127.0.0.1:8000/Proyecto/Obtener_Proyectos')
+      .get<any>(
+        'https://7thhjht4-8000.use2.devtunnels.ms/Proyecto/Obtener_Proyectos'
+      )
       .subscribe({
         next: (data) => {
           this.proyectos = data.proyecto;
-          console.log(this.proyectos)
+          console.log(this.proyectos);
         },
         error: (err) => {
           console.error('Error al cargar proyectos', err);
@@ -54,7 +56,10 @@ export class ProyectoComponent implements OnInit {
     const proyecto = this.formulario.value;
 
     this.http
-      .post('http://127.0.0.1:8000/Proyecto/Crear_Proyecto', proyecto)
+      .post(
+        'https://7thhjht4-8000.use2.devtunnels.ms/Proyecto/Crear_Proyecto',
+        proyecto
+      )
       .subscribe({
         next: () => {
           this.formulario.reset();
