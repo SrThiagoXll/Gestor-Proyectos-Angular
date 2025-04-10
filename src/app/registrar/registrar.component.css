@@ -1,0 +1,26 @@
+.centrar {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.5rem;
+}
+
+.btn {
+  width: 100%;
+}
+
+h5 {
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}

@@ -1,0 +1,76 @@
+<div class="content">
+
+  <!-- 🔝 Menú Superior -->
+  <header class="top-menu">
+    <h1>Mis Proyectos</h1>
+    <button class="btn" (click)="toggleFormulario()">➕ Crear Proyecto</button>
+  </header>
+
+  <!-- 📋 Formulario de Proyecto -->
+  <div *ngIf="mostrarFormulario" id="formContainer">
+    <div class="form-header">
+      <h2 class="form-h2">Nuevo Proyecto</h2>
+      <button (click)="toggleFormulario()" class="form-button">❌</button>
+    </div>
+
+    <form [formGroup]="formulario" (ngSubmit)="crearProyecto()">
+
+      <div class="form-group">
+        <label for="Nombre_Proyecto">Nombre Proyecto:</label>
+        <input type="text" id="Nombre_Proyecto" formControlName="Nombre_Proyecto" required />
+      </div>
+
+      <div class="form-group">
+        <label for="Descripcion">Descripción:</label>
+        <input type="text" id="Descripcion" formControlName="Descripcion" required />
+        <div *ngIf="formulario.get('Descripcion')?.invalid && formulario.get('Descripcion')?.touched" class="text-danger">
+          La descripción es obligatoria.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="Fecha_Inicio">Fecha Inicio:</label>
+        <input type="date" id="Fecha_Inicio" formControlName="Fecha_Inicio" required />
+      </div>
+
+      <div class="form-group">
+        <label for="Fecha_Final">Fecha Fin:</label>
+        <input type="date" id="Fecha_Final" formControlName="Fecha_Final" required />
+      </div>
+
+      <div class="form-group">
+        <label for="Estado_Proyecto">Estado Proyecto:</label>
+        <select id="Estado_Proyecto" formControlName="Estado_Proyecto" required>
+          <option value="">Seleccione...</option>
+          <option value="Pendiente">Pendiente</option>
+          <option value="En progreso">En progreso</option>
+          <option value="Completado">Completado</option>
+        </select>
+      </div>
+
+      <br />
+      <button type="submit" class="btn">💾 Guardar Proyecto</button>
+    </form>
+  </div>
+
+  <!-- 📦 Lista de Proyectos -->
+  <div id="projectList">
+    <div *ngFor="let proyecto of proyectos" class="project-card">
+      <h3>{{ proyecto.Nombre_Proyecto }}</h3>
+      <p><strong>Descripción:</strong> {{ proyecto.Descripcion }}</p>
+      <p><strong>Inicio:</strong> {{ proyecto.Fecha_Inicio }}</p>
+      <p><strong>Fin:</strong> {{ proyecto.Fecha_Final }}</p>
+      <p [ngClass]="getEstadoClase(proyecto.Estado_Proyecto)">
+        <strong>Estado:</strong> {{ proyecto.Estado_Proyecto }}
+      </p>
+    </div>
+  </div>
+
+  <!-- ⬅️ Botón Volver al Menú -->
+  <div class="form-volver-menu">
+    <a class="btn" routerLink="/inicio">⬅️ Volver al Menú</a>
+  </div>
+
+</div>
+
+<router-outlet></router-outlet>
